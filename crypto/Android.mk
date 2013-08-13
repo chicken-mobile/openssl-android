@@ -133,6 +133,7 @@ local_src_files := \
 	bn/bn_add.c \
 	bn/bn_asm.c \
 	bn/bn_blind.c \
+	bn/bn_const.c \
 	bn/bn_ctx.c \
 	bn/bn_div.c \
 	bn/bn_err.c \
@@ -156,7 +157,11 @@ local_src_files := \
 	bn/bn_sqrt.c \
 	bn/bn_word.c \
 	buffer/buf_err.c \
+	buffer/buf_str.c \
 	buffer/buffer.c \
+	cmac/cm_ameth.c \
+	cmac/cm_pmeth.c \
+	cmac/cmac.c \
 	comp/c_rle.c \
 	comp/c_zlib.c \
 	comp/comp_err.c \
@@ -221,9 +226,8 @@ local_src_files := \
 	dso/dso_lib.c \
 	dso/dso_null.c \
 	dso/dso_openssl.c \
-	dso/dso_vms.c \
-	dso/dso_win32.c \
 	ec/ec2_mult.c \
+	ec/ec2_oct.c \
 	ec/ec2_smpl.c \
 	ec/ec_ameth.c \
 	ec/ec_asn1.c \
@@ -234,11 +238,13 @@ local_src_files := \
 	ec/ec_key.c \
 	ec/ec_lib.c \
 	ec/ec_mult.c \
+	ec/ec_oct.c \
 	ec/ec_pmeth.c \
 	ec/ec_print.c \
 	ec/eck_prn.c \
 	ec/ecp_mont.c \
 	ec/ecp_nist.c \
+	ec/ecp_oct.c \
 	ec/ecp_smpl.c \
 	ecdh/ech_err.c \
 	ecdh/ech_key.c \
@@ -250,6 +256,28 @@ local_src_files := \
 	ecdsa/ecs_ossl.c \
 	ecdsa/ecs_sign.c \
 	ecdsa/ecs_vrf.c \
+	engine/eng_all.c \
+	engine/eng_cnf.c \
+	engine/eng_ctrl.c \
+	engine/eng_dyn.c \
+	engine/eng_err.c \
+	engine/eng_fat.c \
+	engine/eng_init.c \
+	engine/eng_lib.c \
+	engine/eng_list.c \
+	engine/eng_pkey.c \
+	engine/eng_table.c \
+	engine/tb_asnmth.c \
+	engine/tb_cipher.c \
+	engine/tb_dh.c \
+	engine/tb_digest.c \
+	engine/tb_dsa.c \
+	engine/tb_ecdh.c \
+	engine/tb_ecdsa.c \
+	engine/tb_pkmeth.c \
+	engine/tb_rand.c \
+	engine/tb_rsa.c \
+	engine/tb_store.c \
 	err/err.c \
 	err/err_all.c \
 	err/err_prn.c \
@@ -262,6 +290,7 @@ local_src_files := \
 	evp/c_alld.c \
 	evp/digest.c \
 	evp/e_aes.c \
+	evp/e_aes_cbc_hmac_sha1.c \
 	evp/e_bf.c \
 	evp/e_des.c \
 	evp/e_des3.c \
@@ -269,10 +298,12 @@ local_src_files := \
 	evp/e_old.c \
 	evp/e_rc2.c \
 	evp/e_rc4.c \
+	evp/e_rc4_hmac_md5.c \
 	evp/e_rc5.c \
 	evp/e_xcbc_d.c \
 	evp/encode.c \
 	evp/evp_acnf.c \
+	evp/evp_cnf.c \
 	evp/evp_enc.c \
 	evp/evp_err.c \
 	evp/evp_key.c \
@@ -314,9 +345,13 @@ local_src_files := \
 	md5/md5_dgst.c \
 	md5/md5_one.c \
 	modes/cbc128.c \
+	modes/ccm128.c \
 	modes/cfb128.c \
 	modes/ctr128.c \
+	modes/gcm128.c \
 	modes/ofb128.c \
+	modes/xts128.c \
+	o_init.c \
 	objects/o_names.c \
 	objects/obj_dat.c \
 	objects/obj_err.c \
@@ -361,15 +396,17 @@ local_src_files := \
 	pkcs7/pk7_asn1.c \
 	pkcs7/pk7_attr.c \
 	pkcs7/pk7_doit.c \
-	pkcs7/pk7_lib.c	\
+	pkcs7/pk7_lib.c \
 	pkcs7/pk7_mime.c \
 	pkcs7/pk7_smime.c \
 	pkcs7/pkcs7err.c \
+	pqueue/pqueue.c \
 	rand/md_rand.c \
 	rand/rand_egd.c \
 	rand/rand_err.c \
 	rand/rand_lib.c \
 	rand/rand_unix.c \
+	rand/rand_win.c \
 	rand/randfile.c \
 	rc2/rc2_cbc.c \
 	rc2/rc2_ecb.c \
@@ -378,11 +415,13 @@ local_src_files := \
 	rc2/rc2ofb64.c \
 	rc4/rc4_enc.c \
 	rc4/rc4_skey.c \
+	rc4/rc4_utl.c \
 	ripemd/rmd_dgst.c \
 	ripemd/rmd_one.c \
 	rsa/rsa_ameth.c \
 	rsa/rsa_asn1.c \
 	rsa/rsa_chk.c \
+	rsa/rsa_crpt.c \
 	rsa/rsa_eay.c \
 	rsa/rsa_err.c \
 	rsa/rsa_gen.c \
@@ -403,6 +442,8 @@ local_src_files := \
 	sha/sha256.c \
 	sha/sha512.c \
 	sha/sha_dgst.c \
+	srp/srp_lib.c \
+	srp/srp_vfy.c \
 	stack/stack.c \
 	ts/ts_err.c \
 	txt_db/txt_db.c \
@@ -471,12 +512,12 @@ local_src_files := \
 	x509v3/v3err.c
 
 local_c_includes := \
-	external/openssl \
-	external/openssl/crypto/asn1 \
-	external/openssl/crypto/evp \
-	external/openssl/include \
-	external/openssl/include/openssl \
-	external/zlib
+	$(NDK_PROJECT_PATH) \
+	$(NDK_PROJECT_PATH)/crypto/asn1 \
+	$(NDK_PROJECT_PATH)/crypto/evp \
+	$(NDK_PROJECT_PATH)/crypto/modes \
+	$(NDK_PROJECT_PATH)/include \
+	$(NDK_PROJECT_PATH)/include/openssl
 
 local_c_flags := -DNO_WINDOWS_BRAINDEATH
 
@@ -488,7 +529,7 @@ include $(LOCAL_PATH)/../android-config.mk
 LOCAL_SRC_FILES += $(local_src_files)
 LOCAL_CFLAGS += $(local_c_flags)
 LOCAL_C_INCLUDES += $(local_c_includes)
-LOCAL_SHARED_LIBRARIES += libz
+LOCAL_LDLIBS += -lz
 ifeq ($(TARGET_ARCH),arm)
 	LOCAL_SRC_FILES += $(arm_src_files)
 	LOCAL_CFLAGS += $(arm_cflags)
@@ -499,8 +540,6 @@ ifeq ($(TARGET_SIMULATOR),true)
 	# Make valgrind happy.
 	LOCAL_CFLAGS += -DPURIFY
     LOCAL_LDLIBS += -ldl
-else
-	LOCAL_SHARED_LIBRARIES += libdl
 endif
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE:= libcrypto
@@ -515,11 +554,10 @@ ifeq ($(WITH_HOST_DALVIK),true)
     LOCAL_CFLAGS += $(local_c_flags) -DPURIFY
     LOCAL_C_INCLUDES += $(local_c_includes)
     LOCAL_SRC_FILES += $(non_arm_src_files)
-    LOCAL_STATIC_LIBRARIES += libz
     LOCAL_LDLIBS += -ldl
     LOCAL_MODULE_TAGS := optional
     LOCAL_MODULE:= libcrypto
-    include $(BUILD_HOST_SHARED_LIBRARY)
+    include $(BUILD_SHARED_LIBRARY)
 endif
 
 ########################################
@@ -531,8 +569,7 @@ LOCAL_SRC_FILES += $(local_src_files)
 LOCAL_CFLAGS += $(local_c_flags) -DPURIFY
 LOCAL_C_INCLUDES += $(local_c_includes)
 LOCAL_SRC_FILES += $(non_arm_src_files)
-LOCAL_STATIC_LIBRARIES += libz
 LOCAL_LDLIBS += -ldl
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE:= libcrypto_static
-include $(BUILD_HOST_STATIC_LIBRARY)
+include $(BUILD_STATIC_LIBRARY)
